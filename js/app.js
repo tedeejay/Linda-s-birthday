@@ -116,6 +116,17 @@
     note.textContent = `until ${+m[3]} ${months[+m[2] - 1]} ${m[1]}`;
   }
 
+  // When the countdown reaches zero, the passcode appears by itself
+  let revealed = false, prevDiff = null;
+  function revealPasscode(live) {
+    if (revealed) return;
+    revealed = true;
+    $('#gate-code').textContent = cfg.passcode;
+    $('#gate-reveal').hidden = false;
+    $('#gate-label').textContent = 'Type it in to begin';
+    if (live) celebrate(innerWidth / 2, innerHeight * 0.4); // only if she is watching it hit zero
+  }
+
   function tick() {
     const diff = Math.max(0, target - Date.now());
     const s = Math.floor(diff / 1000);
@@ -123,7 +134,11 @@
     cd.h.textContent = pad(Math.floor((s % 86400) / 3600));
     cd.m.textContent = pad(Math.floor((s % 3600) / 60));
     cd.s.textContent = pad(s % 60);
-    if (diff === 0) note.textContent = 'Today is your day 💜';
+    if (diff === 0) {
+      note.textContent = 'Today is your day 💜';
+      revealPasscode(prevDiff !== null && prevDiff > 0);
+    }
+    prevDiff = diff;
   }
   tick();
   setInterval(tick, 1000);

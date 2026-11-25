@@ -427,3 +427,9 @@ body.playing .eq { display: inline-flex; }
 @keyframes shake { 20%, 60% { transform: translateX(-9px); } 40%, 80% { transform: translateX(9px); } }
 .gate.unlocked .pass, .gate.unlocked .gate-msg { display: none; }
 @media (prefers-reduced-motion: reduce) { .gate.shake { animation: none; } }
+
+.gate-reveal { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 28px; margin: 0; animation: revealIn .9s var(--ease) both, timerGlow 3.2s ease-in-out .9s infinite; }
+.gate-reveal small { font-style: italic; opacity: .85; }
+.gate-reveal b { font-size: 2.6rem; letter-spacing: .35em; text-indent: .35em; line-height: 1.1; text-shadow: 0 0 22px rgba(246, 180, 212, .7); }
+@keyframes revealIn { from { opacity: 0; transform: translateY(10px) scale(.92); } }
+.gate.unlocked .gate-reveal { display: none; }

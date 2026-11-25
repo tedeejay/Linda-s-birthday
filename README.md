@@ -98,7 +98,7 @@ netlify deploy --prod --dir=.
 - **Restart**: the button on the last page resets everything (letter, cards, cake) for another go.
 
 ## Passcode, music and the app
-- **Passcode:** page 1 shows the countdown and asks for a 4-digit code (`passcode` in `config.js`, set to 1920). Give it to her on the day. It is a sweet lock, not real security: anyone who views the page source could find it.
+- **Passcode:** page 1 shows the countdown and asks for a 4-digit code (`passcode` in `config.js`, set to 1920). The passcode reveals itself on page 1 when the countdown reaches zero, so you don't need to send it to her. It is a sweet lock, not real security: anyone who views the page source could find it.
 - **Auto music:** browsers never allow sound before a tap, so the song starts the moment she unlocks with the passcode. She can pause it with the music button.
 - **Install as an app:** once the site is live on https, she can add it to her home screen. Android/Chrome: menu → *Install app*. iPhone/Safari: Share → *Add to Home Screen*. The icon is cropped from `photo-5.jpg`; to change it, replace the files in `assets/icons/`.
 - **After you update the site,** open it once online so the app picks up the changes. If something looks stale, change `VERSION` in `sw.js`.

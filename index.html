@@ -59,6 +59,10 @@
         <p class="date-line" id="cd-note">until 28 November 2026</p>
 
         <form class="gate" id="gate" autocomplete="off" novalidate>
+          <p class="gate-reveal glass" id="gate-reveal" hidden>
+            <small>Your passcode is</small>
+            <b id="gate-code"></b>
+          </p>
           <label class="gate-label" id="gate-label" for="pass">Enter the passcode to begin</label>
           <input class="pass glass" id="pass" type="password" inputmode="numeric" pattern="[0-9]*"
                  maxlength="4" autocomplete="off" aria-describedby="gate-msg" placeholder="••••">

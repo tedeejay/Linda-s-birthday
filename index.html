@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Something Special Is Waiting For You 💜</title>
+  <meta name="description" content="A little world made especially for you.">
+  <meta name="theme-color" content="#2a1552">
+  <meta property="og:title" content="Something Special Is Waiting For You 💜">
+  <meta property="og:description" content="A little world made especially for you.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💜%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Magical background layers -->
+  <div class="sky" aria-hidden="true"></div>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div id="hearts" aria-hidden="true"></div>
+
+  <!-- Music player (visible on every page) -->
+  <button id="music" class="music" type="button" aria-pressed="false" aria-label="Play music">
+    <span class="music-icon" aria-hidden="true">
+      <svg class="i-play" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+      <svg class="i-pause" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M7 4.5h3.5v15H7zM13.5 4.5H17v15h-3.5z"/></svg>
+    </span>
+    <span class="music-label" id="music-label">Play music</span>
+    <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+  <audio id="bgm" loop preload="none"></audio>
+
+  <main id="stage">
+
+    <!-- ===================== PAGE 1 — COUNTDOWN ===================== -->
+    <section class="screen" id="screen-1" data-page="1" aria-label="Birthday countdown">
+      <div class="inner">
+        <h1 class="lead">Something Special Is Waiting For You</h1>
+        <h2 class="name shimmer-wrap">
+          <span class="name-text shimmer" data-name>Baby</span>
+          <span class="name-heart" aria-hidden="true">💜</span>
+        </h2>
+
+        <button class="timer" id="timer" type="button" aria-label="Birthday countdown. Tap to begin.">
+          <span class="unit glass"><b id="cd-d">00</b><small>days</small></span>
+          <span class="unit glass"><b id="cd-h">00</b><small>hours</small></span>
+          <span class="unit glass"><b id="cd-m">00</b><small>minutes</small></span>
+          <span class="unit glass"><b id="cd-s">00</b><small>seconds</small></span>
+        </button>
+        <p class="date-line" id="cd-note">until 28 November 2026</p>
+
+        <button class="btn" id="begin" type="button">Tap the timer to begin</button>
+      </div>
+    </section>
+
+    <!-- ===================== PAGE 2 — LETTER ===================== -->
+    <section class="screen" id="screen-2" data-page="2" aria-label="A birthday letter">
+      <div class="inner">
+        <h2 class="page-title">A Birthday Letter</h2>
+
+        <div class="letter-stage">
+          <button class="envelope" id="envelope" type="button" aria-label="Open the envelope">
+            <span class="env-back"></span>
+            <span class="env-paper"><span class="env-lines"></span></span>
+            <span class="env-left"></span><span class="env-right"></span><span class="env-bottom"></span>
+            <span class="env-flap"></span>
+            <span class="env-seal" aria-hidden="true">♥</span>
+          </button>
+
+          <article class="letter" id="letter" hidden>
+            <p class="greeting" id="letter-greeting"></p>
+            <div id="letter-body"></div>
+            <p class="closing" id="letter-closing"></p>
+            <p class="signature" id="letter-signature"></p>
+          </article>
+        </div>
+        <p class="hint" id="env-hint">Tap the envelope to open it</p>
+
+        <div class="nav">
+          <button class="btn ghost" type="button" data-go="1">Back</button>
+          <button class="btn" id="continue-2" type="button" data-go="3" hidden>Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PAGE 3 — MEMORIES ===================== -->
+    <section class="screen" id="screen-3" data-page="3" aria-label="Our memories">
+      <div class="inner wide">
+        <h2 class="page-title">Our Memories</h2>
+        <p class="page-sub">Tap a photo to see it bigger</p>
+        <ul class="gallery" id="gallery"></ul>
+        <div class="nav">
+          <button class="btn ghost" type="button" data-go="2">Back</button>
+          <button class="btn" type="button" data-go="4">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PAGE 4 — REASONS ===================== -->
+    <section class="screen" id="screen-4" data-page="4" aria-label="Reasons you are special">
+      <div class="inner wide">
+        <h2 class="page-title">Reasons You’re Special</h2>
+        <p class="page-sub">Tap each card to open it</p>
+        <div class="cards" id="cards"></div>
+        <div class="nav">
+          <button class="btn ghost" type="button" data-go="3">Back</button>
+          <button class="btn" id="surprise-btn" type="button" data-go="5">One Last Surprise</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PAGE 5 — FINAL SURPRISE ===================== -->
+    <section class="screen" id="screen-5" data-page="5" aria-label="The final birthday surprise">
+      <div class="inner">
+        <h2 class="page-title big shimmer-wrap">
+          <span class="shimmer">Happy Birthday, <span data-name>Baby</span>!</span>
+          <span class="name-heart" aria-hidden="true">💜</span>
+        </h2>
+
+        <div class="cake-wrap" id="cake-wrap">
+          <svg id="cake" class="cake" viewBox="0 0 320 310" role="button" tabindex="0"
+               aria-label="Birthday cake. Tap to blow out the candles." xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gBottom" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6d6fc"/><stop offset="1" stop-color="#b48fe8"/></linearGradient>
+              <linearGradient id="gMid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd6e8"/><stop offset="1" stop-color="#f08fbd"/></linearGradient>
+              <linearGradient id="gTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eadcff"/></linearGradient>
+              <radialGradient id="gFlame" cx=".5" cy=".75" r=".65"><stop offset="0" stop-color="#fffbe6"/><stop offset=".45" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff9a6b"/></radialGradient>
+              <radialGradient id="gGlow"><stop offset="0" stop-color="#ffdca0" stop-opacity=".6"/><stop offset="1" stop-color="#ffdca0" stop-opacity="0"/></radialGradient>
+            </defs>
+            <ellipse cx="160" cy="288" rx="146" ry="16" fill="rgba(10,0,30,.35)"/>
+            <ellipse cx="160" cy="276" rx="146" ry="19" fill="#f7efff"/>
+            <ellipse cx="160" cy="272" rx="136" ry="14" fill="#fff"/>
+            <rect x="34" y="196" width="252" height="78" rx="14" fill="url(#gBottom)"/>
+            <rect x="64" y="140" width="192" height="64" rx="12" fill="url(#gMid)"/>
+            <rect x="98" y="92" width="124" height="54" rx="11" fill="url(#gTop)"/>
+            <g id="cake-deco"></g>
+            <g id="cake-candles"></g>
+          </svg>
+        </div>
+        <p class="hint" id="cake-hint">Tap the cake and make a wish</p>
+
+        <div class="final glass-wrap" id="final">
+          <div>
+            <div class="final-card glass" id="final-card"></div>
+          </div>
+        </div>
+
+        <div class="nav">
+          <button class="btn ghost" type="button" data-go="4">Back</button>
+          <button class="btn" id="restart" type="button">Restart the magic</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Photo lightbox -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lb-close" id="lb-close" type="button" aria-label="Close photo">&times;</button>
+    <button class="lb-arrow prev" id="lb-prev" type="button" aria-label="Previous photo">&#8249;</button>
+    <figure class="lb-fig" id="lb-fig">
+      <img id="lb-img" alt="">
+      <figcaption id="lb-cap"></figcaption>
+      <span class="lb-count" id="lb-count"></span>
+    </figure>
+    <button class="lb-arrow next" id="lb-next" type="button" aria-label="Next photo">&#8250;</button>
+  </div>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <noscript><p style="position:fixed;inset:0;display:grid;place-items:center;color:#fff;background:#2a1552;text-align:center;padding:2rem">This little world needs JavaScript to open. 💜</p></noscript>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

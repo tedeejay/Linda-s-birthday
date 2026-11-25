@@ -1,0 +1,8 @@
+# Netlify settings — nothing to build, just publish this folder as-is.
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

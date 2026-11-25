@@ -1,8 +1,9 @@
-# Netlify settings — nothing to build, just publish this folder as-is.
 [build]
   publish = "."
 
 [[headers]]
-  for = "/assets/*"
+  for = "/*"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex, nofollow"

@@ -8,7 +8,13 @@
   <meta name="theme-color" content="#2a1552">
   <meta property="og:title" content="Something Special Is Waiting For You 💜">
   <meta property="og:description" content="A little world made especially for you.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💜%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="For You 💜">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,15 +50,21 @@
           <span class="name-heart" aria-hidden="true">💜</span>
         </h2>
 
-        <button class="timer" id="timer" type="button" aria-label="Birthday countdown. Tap to begin.">
+        <div class="timer" id="timer" role="timer" aria-label="Countdown to the birthday">
           <span class="unit glass"><b id="cd-d">00</b><small>days</small></span>
           <span class="unit glass"><b id="cd-h">00</b><small>hours</small></span>
           <span class="unit glass"><b id="cd-m">00</b><small>minutes</small></span>
           <span class="unit glass"><b id="cd-s">00</b><small>seconds</small></span>
-        </button>
+        </div>
         <p class="date-line" id="cd-note">until 28 November 2026</p>
 
-        <button class="btn" id="begin" type="button">Tap the timer to begin</button>
+        <form class="gate" id="gate" autocomplete="off" novalidate>
+          <label class="gate-label" id="gate-label" for="pass">Enter the passcode to begin</label>
+          <input class="pass glass" id="pass" type="password" inputmode="numeric" pattern="[0-9]*"
+                 maxlength="4" autocomplete="off" aria-describedby="gate-msg" placeholder="••••">
+          <p class="gate-msg" id="gate-msg" role="status" aria-live="polite"></p>
+          <button class="btn" id="begin" type="submit">Unlock 💜</button>
+        </form>
       </div>
     </section>
 

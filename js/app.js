@@ -128,12 +128,35 @@
   tick();
   setInterval(tick, 1000);
 
-  function begin() {
+  /* Passcode gate: the only way past page 1 */
+  const gate = $('#gate'), pass = $('#pass'), gateMsg = $('#gate-msg'), gateLabel = $('#gate-label'), beginBtn = $('#begin');
+  let unlocked = false;
+
+  pass.addEventListener('input', () => {
+    pass.value = pass.value.replace(/\D/g, '').slice(0, 4);
+    gateMsg.textContent = '';
+  });
+
+  gate.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!unlocked) {
+      if (pass.value !== String(cfg.passcode)) {
+        gateMsg.textContent = 'That’s not it — try again 💜';
+        pass.value = '';
+        gate.classList.remove('shake'); void gate.offsetWidth; gate.classList.add('shake');
+        pass.focus();
+        return;
+      }
+      unlocked = true;
+      gate.classList.add('unlocked');
+      gateLabel.textContent = 'Welcome back 💜';
+      beginBtn.textContent = 'Begin';
+      pass.blur();
+    }
+    // This tap is the user gesture that lets the browser start the song
     if (cfg.startMusicOnBegin && audio.paused) { musicBtn.classList.add('touched'); playMusic(); }
     go(2);
-  }
-  $('#timer').addEventListener('click', begin);
-  $('#begin').addEventListener('click', begin);
+  });
 
   /* ------------------------------------------------------------ Page 2: letter */
   const envelope = $('#envelope');
@@ -547,6 +570,11 @@
         setTimeout(() => spawnHeart({ x: Math.max(10, Math.min(cW - 30, x + (Math.random() - .5) * 360)), bottom: Math.random() * 120 - 30, burst: true }), i * 90);
       }
     }
+  }
+
+  /* ------------------------------------------------------------ Install as an app (PWA) */
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
   }
 
   /* ------------------------------------------------------------ Start */

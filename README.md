@@ -9,12 +9,15 @@ Plain HTML, CSS and JavaScript — no build step, no installs, free to host.
 baby-birthday/
 ├── index.html            ← the page structure (you rarely need to touch this)
 ├── netlify.toml          ← hosting settings for Netlify
+├── manifest.webmanifest  ← makes it installable as an app (name, colours, icons)
+├── sw.js                 ← lets the app open offline
 ├── css/
 │   └── style.css         ← colours, fonts, animations
 ├── js/
 │   ├── config.js         ← ✎ EDIT THIS: letter, captions, photos, reasons, date, music
 │   └── app.js            ← the logic (navigation, countdown, cake, confetti…)
 └── assets/
+    ├── icons/            ← app icons, made from photo-5.jpg
     ├── images/           ← put her photos here (her photos are already in here)
     └── audio/
         └── music.mp3     ← placeholder music box tune — replace with your song
@@ -31,7 +34,8 @@ baby-birthday/
 | The five reason cards | `reasons` (icon, title, text) |
 | Final message after the cake | `finalMessage` |
 | Music volume | `musicVolume` (0 to 1) |
-| Start music when she taps the timer | `startMusicOnBegin: true` |
+| Passcode on page 1 | `passcode` (currently `1920`) |
+| Start music automatically after the passcode | `startMusicOnBegin: true` |
 
 ### Adding her real photos
 1. Copy the pictures into `assets/images/` (e.g. `us-1.jpg`).
@@ -92,3 +96,9 @@ netlify deploy --prod --dir=.
 - **Navigation**: every page has Back/Next buttons, and the phone/browser back button works too. Refreshing always returns to page 1.
 - **Reduced motion**: if her device has “reduce motion” turned on, floating hearts and heavy animation are switched off automatically.
 - **Restart**: the button on the last page resets everything (letter, cards, cake) for another go.
+
+## Passcode, music and the app
+- **Passcode:** page 1 shows the countdown and asks for a 4-digit code (`passcode` in `config.js`, set to 1920). Give it to her on the day. It is a sweet lock, not real security: anyone who views the page source could find it.
+- **Auto music:** browsers never allow sound before a tap, so the song starts the moment she unlocks with the passcode. She can pause it with the music button.
+- **Install as an app:** once the site is live on https, she can add it to her home screen. Android/Chrome: menu → *Install app*. iPhone/Safari: Share → *Add to Home Screen*. The icon is cropped from `photo-5.jpg`; to change it, replace the files in `assets/icons/`.
+- **After you update the site,** open it once online so the app picks up the changes. If something looks stale, change `VERSION` in `sw.js`.

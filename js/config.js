@@ -20,9 +20,13 @@ window.BIRTHDAY_CONFIG = {
   music: "assets/audio/music.mp3",
   musicVolume: 0.6,
 
-  /* If true, music also starts when she taps the timer on page 1.
-     Leave false so nothing ever plays until she presses the music button. */
-  startMusicOnBegin: false,
+  /* If true, the music starts by itself the moment she unlocks the page with the
+     passcode (browsers don't allow sound before a tap, so this is the earliest
+     moment it can start). She can still pause it with the music button. */
+  startMusicOnBegin: true,
+
+  /* Passcode shown on page 1. Give it to her on the day. 4 digits. */
+  passcode: "1920",
 
   /* ------------------------------------------------------------------ PAGE 2 */
   letter: {

@@ -182,13 +182,11 @@ body.playing .eq { display: inline-flex; }
 .name { font-family: var(--script); font-weight: 400; font-size: clamp(5rem, 24vw, 10rem); line-height: 1.05; margin-bottom: 18px; }
 
 .timer {
-  appearance: none; border: 0; background: none; cursor: pointer; padding: 10px; border-radius: 28px;
+  padding: 10px; border-radius: 28px;
   display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(8px, 2.4vw, 16px);
   transition: transform .4s var(--ease);
   animation: timerGlow 3.2s ease-in-out infinite;
 }
-.timer:hover { transform: scale(1.04); }
-.timer:active { transform: scale(.98); }
 @keyframes timerGlow {
   0%, 100% { box-shadow: 0 0 30px rgba(168, 116, 230, .22); }
   50%      { box-shadow: 0 0 64px rgba(246, 180, 212, .42); }
@@ -412,3 +410,20 @@ body.playing .eq { display: inline-flex; }
   #hearts { display: none; }
   .screen { filter: none; }
 }
+
+
+/* ---------- Passcode gate ---------- */
+.gate { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 320px; }
+.gate-label { font-style: italic; opacity: .9; }
+.pass {
+  width: 100%; text-align: center; font-family: var(--serif); font-weight: 600;
+  font-size: 2rem; letter-spacing: .5em; text-indent: .5em; color: var(--pearl);
+  padding: .35em .5em; outline: none; border-radius: 18px;
+}
+.pass::placeholder { color: rgba(255, 255, 255, .35); }
+.pass:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(246, 180, 212, .35), 0 12px 40px rgba(20, 5, 50, .35); }
+.gate-msg { min-height: 1.4em; font-style: italic; color: var(--rose); }
+.gate.shake { animation: shake .5s var(--ease); }
+@keyframes shake { 20%, 60% { transform: translateX(-9px); } 40%, 80% { transform: translateX(9px); } }
+.gate.unlocked .pass, .gate.unlocked .gate-msg { display: none; }
+@media (prefers-reduced-motion: reduce) { .gate.shake { animation: none; } }
